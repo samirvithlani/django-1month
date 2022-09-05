@@ -1,11 +1,12 @@
 
-
 from django.http import HttpResponse
 
 from django.shortcuts import render
 
-from .models import Employee
+from .models import Employee, Student
 from django.template import context
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView
 
 # Create your views here.
 #function based view
@@ -39,4 +40,16 @@ def getEmployees(request):
     }
     return render(request,"home/employees.html",context)
     
+class StudentView(CreateView):
+    model=Student
+    fields= '__all__'
+    template_name = 'home/student.html'
+    success_url="/home/studentlist"
     
+class StudentListView(ListView):
+    model = Student
+    template_name = 'home/studentlist.html'
+    context_object_name = 'students'
+    
+        
+         
