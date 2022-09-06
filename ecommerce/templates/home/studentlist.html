@@ -11,18 +11,37 @@
 <body>
 
     
-{% for x in students  %}
 
 
-<div class="card" style="width: 18rem;">
-    
-    <div class="card-body">
-      <h5 class="card-title">{{x.name}}</h5>
-      <p class="card-text">{{x.address}}</p>
-      <p class="card-text">{{x.age}}</p>
-      
-    </div>
-  </div>
-  {% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Age</th>
+      <th scope="col">Is Active</th>
+      <th scope="col">ACtion</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in students  %}
+    <tr>
+      <th scope="row">
+       <a href = "{% url 'home:studentdetail' x.pk %}" >{{x.id}}</a>
+      </th>
+      <td>{{x.name}}</td>
+      <td>{{x.age}}</td>
+      <td>{{x.isActive}}</td>
+      <td>
+        <a href = "{% url 'home:deletestudent' x.id %}" class = "btn btn-danger">Delete</a>
+        <a href = "{% url 'home:studentupdate' x.id %}" class = "btn btn-warning">Update</a>
+      </td>
+    </tr>
+    {% endfor %}  
+  </tbody>
+</table>
+  
 </body>
 </html>

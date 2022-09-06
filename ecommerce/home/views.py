@@ -5,8 +5,8 @@ from django.shortcuts import render
 
 from .models import Employee, Student
 from django.template import context
-from django.views.generic.edit import CreateView
-from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView,DetailView
 
 # Create your views here.
 #function based view
@@ -52,4 +52,18 @@ class StudentListView(ListView):
     context_object_name = 'students'
     
         
-         
+class StudentDeleteView(DeleteView):
+    model = Student
+    template_name = 'home/studentdelete.html'
+    success_url = '/home/studentlist'         
+    
+class StudentDetailView(DetailView):
+    model = Student
+    template_name = 'home/studentdetail.html'
+    context_object_name = 'student'
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    fields = '__all__'
+    template_name = 'home/studentupdate.html'
+    success_url = '/home/studentlist'    
